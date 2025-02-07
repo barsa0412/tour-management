@@ -1,7 +1,7 @@
 import React from "react"; //6.9k (gzipped: 2.7k)
 import '../styles/home.css'
 
-import { Container, Row, Col} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import heroImg from '../assets/images/hero-img01.jpg';
 import heroImg02 from '../assets/images/hero-img02.jpg';
 import heroVideo from '../assets/images/hero-video.mp4';
@@ -50,6 +50,16 @@ const Home = () => {
         </Container>
     </section>
     {/* ========== hero section end ========= */}
+    <section>
+        <Container>
+            <Row>
+                <Col lg='3'>
+                <h5 className="services__subtitle">What we serve</h5>
+                <h2 className="services__title">We offer our best services</h2>
+                </Col>
+            </Row>
+        </Container>
+    </section>
 </>
 };
 

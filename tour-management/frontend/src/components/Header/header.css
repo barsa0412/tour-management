@@ -24,7 +24,7 @@
 }
 
 .nav__item a.active__link{
-    color: var(--secondary-color);
+    color: orange;
 }
 
 .mobile__menu {

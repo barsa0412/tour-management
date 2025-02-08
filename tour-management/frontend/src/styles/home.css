@@ -12,7 +12,7 @@
 }
 
 .hero__content h1 .highlight {
-    color: var(--secondary-color);
+    color: orange;
 }
 
 .hero__content p {
@@ -27,7 +27,7 @@
     width: 100%;
     height: 350px;
     border-radius: 20px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid orange;
     object-fit: cover;
 }
 
@@ -48,5 +48,10 @@
 
 .services__title {
     font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.featured__tour-title {
+    font-size: 2.3rem;
     font-weight: 500;
 }

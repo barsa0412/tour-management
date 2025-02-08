@@ -9,8 +9,10 @@ import worldImg from '../assets/images/world.png';
 import Subtitle from './../shared/Subtitle';
 
 import SearchBar from "../shared/SearchBar";
+import ServiceList from "../services/ServiceList";
+
 const Home = () => {
-    return <>
+    return ( <>
     {/* ========= hero section start ==========*/}
     <section>
         <Container>
@@ -57,10 +59,26 @@ const Home = () => {
                 <h5 className="services__subtitle">What we serve</h5>
                 <h2 className="services__title">We offer our best services</h2>
                 </Col>
+                <ServiceList/>
             </Row>
         </Container>
     </section>
+
+    {/* ============= featured tour section start =========== */}
+     <section>
+        <Container>
+            <Row>
+                <Col lg="12" className="mb-5">
+                <Subtitle subtitle={"Explore"} />
+                <h2 className="featured__tour-title">Our featured tours</h2>
+                </Col>
+            </Row>
+        </Container>
+     </section>
+    {/* ============= featured tour section end =========== */}
+
 </>
+    );
 };
 
 export default Home;

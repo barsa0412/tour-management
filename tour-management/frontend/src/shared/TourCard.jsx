@@ -2,23 +2,38 @@ import React from "react"; //6.9k (gzipped: 2.7k)
 import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import "./tour-card.css";
+
 const TourCard = ({tour}) => {
-    const {id, title, photo, price, featured, avgRating, reviews } = tour
-    return <div className="tour__card">
+    const {id, title, city, photo, price, featured, avgRating, reviews } = tour
+    return ( <div className="tour__card">
         <Card>
             <div className="tour__img">
                 <img src={photo} alt="tour-img" />
                 <span>Featured</span>
             </div>
-        </Card>
-        <CardBody>
+            <CardBody>
             <div className="card__top d-flex align-items-center justify-content-between">
                 <span className="tour__location d-flex align-items-center gap-1">
-                <i class="ri-map-pin-range-line"></i>
+                <i class="ri-map-pin-range-line"></i> {city}
+                </span>
+                <span className="tour__rating d-flex align-items-center gap-1">
+                <i class="ri-user-star-line"></i> {avgRating} {" "} 
+                <span>({reviews.length})</span>
                 </span>
             </div>
+            <h5 className="tour__title"><Link to={`/tours/${id}`}>{title}</Link></h5>
+            <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
+                <h5>${price} <span>/per person</span></h5>
+
+                <button className="btn booking__btn">
+                    <Link to={`/tours/${id}`}>Book Now</Link>
+                </button>
+            </div>
         </CardBody>
-    </div>;
+        </Card>
+    </div>
+    );
 };
 
 export default TourCard;

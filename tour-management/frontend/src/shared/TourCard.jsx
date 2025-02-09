@@ -3,14 +3,18 @@ import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import "./tour-card.css";
+import calculateAvgRating from "../utils/avgRating";
 
 const TourCard = ({tour}) => {
-    const {id, title, city, photo, price, featured, avgRating, reviews } = tour
+    const {id, title, city, photo, price, featured, reviews } = tour;
+
+    const { totalRating, avgRating } = calculateAvgRating(reviews);
+
     return ( <div className="tour__card">
         <Card>
             <div className="tour__img">
                 <img src={photo} alt="tour-img" />
-                <span>Featured</span>
+                {featured && <span>Featured</span>}
             </div>
             <CardBody>
             <div className="card__top d-flex align-items-center justify-content-between">
@@ -18,8 +22,12 @@ const TourCard = ({tour}) => {
                 <i class="ri-map-pin-range-line"></i> {city}
                 </span>
                 <span className="tour__rating d-flex align-items-center gap-1">
-                <i class="ri-user-star-line"></i> {avgRating} {" "} 
-                <span>({reviews.length})</span>
+                <i class="ri-user-star-line"></i> {avgRating === 0 ? null : avgRating }
+                {totalRating === 0 ? (
+                    "Not rated" 
+                ) : (
+                     <span>({reviews.length})</span> 
+                    )}
                 </span>
             </div>
             <h5 className="tour__title"><Link to={`/tours/${id}`}>{title}</Link></h5>

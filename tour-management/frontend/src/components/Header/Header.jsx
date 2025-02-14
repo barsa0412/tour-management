@@ -1,8 +1,8 @@
 import React,{useRef, useEffect} from "react"; //6.9k (gzipped: 2.7k)
-import { Container, Row, Button} from 'reactstrap'
+import { Container, Row, Button} from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
-import logo from '../../assets/images/logo.png'
-import './header.css'
+import logo from "../../assets/images/logo.png";
+import "./header.css";
 
 const nav__links= [
     {
@@ -20,24 +20,26 @@ const nav__links= [
 ]
 
 const Header = () => {
-    const headerRef = useRef(null)
+    const headerRef = useRef(null);
 
-    const stickyHeaderFunc = ()=> {
-        window.addEventListener('scroll',()=>{
-            if(document.body.scrollTop >80 || document.documentElement.scrollTop > 80){
-                headerRef.current.classList.add('sticky__header')
-            }else {
-                headerRef.current.classList.remove('sticky__header')
+    const stickyHeaderFunc = () => {
+        window.addEventListener("scroll", () => {
+            if(
+                document.body.scrollTop > 80 || 
+                document.documentElement.scrollTop > 80){
+                headerRef.current.classList.add("sticky__header");
+            } else {
+                headerRef.current.classList.remove("sticky__header");
 
             }
-        })
-    }
+        });
+    };
 
-useEffect(()=>{
-    stickyHeaderFunc()
+useEffect(() => {
+    stickyHeaderFunc();
 
-    return window.removeEventListener('scroll', stickyHeaderFunc)
-})
+    return window.removeEventListener("scroll", stickyHeaderFunc);
+});
 
     return ( <header className="header" ref={headerRef}>
         <Container>
@@ -68,11 +70,11 @@ useEffect(()=>{
                    <div className="nav__btns d-flex align-items-center gap-4">
                     {/* <Button className="btn secondary__btn"><link to='/login'>Login</link></Button> */}
                     <Button className="btn secondary__btn">
-                                   <NavLink to='/login' style={{ color: 'inherit', textDecoration: 'none' }}>Login</NavLink>
+                                   <Link to='/login' style={{ color: 'inherit', textDecoration: 'none' }}>Login</Link>
                                 </Button>
                     {/* <Button className="btn primary__btn"><link to='/register'>Register</link></Button> */}
                     <Button className="btn primary__btn">
-                                    <NavLink to='/register' style={{ color: 'inherit', textDecoration: 'none' }}>Register</NavLink>
+                                    <Link to='/register' style={{ color: 'inherit', textDecoration: 'none' }}>Register</Link>
                                 </Button>
                    </div>
                     <span className="mobile__menu"></span>

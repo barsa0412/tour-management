@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import tourData from "../assets/data/tours";
 import calculateAvgRating from "../utils/avgRating";
 import avatar from "../assets/images/avatar.jpg";
+import Booking from "../components/Booking/Booking";
 
 const TourDetails = () => {
     const {id} = useParams();
@@ -41,7 +42,7 @@ const TourDetails = () => {
                         <div className="d-flex align-items-center gap-5">
                             <span className="d-flex align-items-center gap-1">
                 <i class="ri-user-star-line" style={{color : "orange"}}
-                ></i> {calculateAvgRating === 0 ? null : avgRating }
+                ></i> {avgRating === 0 ? null : avgRating }
                 {totalRating === 0 ? (
                     "Not rated" 
                 ) : (
@@ -108,7 +109,7 @@ const TourDetails = () => {
                 </div>
                 </Col>
                 <Col lg="4">
-                
+                <Booking tour={tour} avgRating= {avgRating}/>
                 </Col>
             </Row>
         </Container>

@@ -114,6 +114,7 @@ const TourDetails = () => {
             </Row>
         </Container>
     </section>
+    <Newsletter/>
     </>
     );
 };

@@ -69,6 +69,7 @@
     font-size: 1rem;
     color: var(--text-color);
     font-weight: 500;
+
 }
 
 .booking__bottom{
@@ -80,3 +81,4 @@
     font-weight: 700 !important;
     font-size: 1.1rem !important;
 }
+

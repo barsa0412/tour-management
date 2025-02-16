@@ -76,7 +76,14 @@ const Booking = ({ tour, avgRating }) => {
                     <span>${totalAmount}</span>
                 </ListGroupItem>
             </ListGroup>
-            <Button className="btn primary__btn w-100 mt-4" onClick={handleClick}>Book Now</Button>
+            <Button 
+                                   className="btn w-100 mt-4" 
+                                       onClick={handleClick} 
+                            style={{ backgroundColor: 'orange', color: 'white' }}
+                           >
+                                 Book Now
+            </Button>
+
         </div>
     </div>
     );

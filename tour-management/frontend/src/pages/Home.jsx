@@ -1,5 +1,5 @@
 import React from "react"; //6.9k (gzipped: 2.7k)
-import '../styles/home.css'
+import "../styles/home.css";
 
 import { Container, Row, Col } from 'reactstrap';
 import heroImg from '../assets/images/hero-img01.jpg';
@@ -24,7 +24,7 @@ const Home = () => {
             <Row>
                 <Col lg='6'>
                  <div className="hero__content">
-                    <div className="hero__subtitle d-flex align-items-center ">
+                    <div className="hero__subtitle d-flex align-items-center custom-font ">
                       <Subtitle subtitle={'Know Before You Go'}/>
                       <img src={worldImg} alt="" />
                     </div>

@@ -12,7 +12,7 @@ const Newsletter =() => {
                     <Col lg="6">
                     <div className="newsletter__content">
                         <h2>Subscribe now to get useful traveling information.</h2>
-                        <div className="newslwtter__input">
+                        <div className="newsletter__input">
                             <input type="email" placeholder="Enter your email" />
                             <button className="btn newsletter__btn">Subscribe</button>
                         </div>
@@ -28,7 +28,7 @@ const Newsletter =() => {
             </Container>
         </section>
 
-    )
-}
+    );
+};
 
 export default Newsletter;

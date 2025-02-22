@@ -1,7 +1,7 @@
-import React,{use, useRef} from "react"; //6.9k (gzipped: 2.7k)
+import React,{ useRef } from "react"; //6.9k (gzipped: 2.7k)
 import "./search-bar.css";
 import { Col, Form, FormGroup } from "reactstrap";
-import { BASE_URL } from "../utils/config";
+import { BASE_URL } from "./../utils/config";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
@@ -15,19 +15,19 @@ const SearchBar = () => {
         const distance = distanceRef.current.value;
         const maxGroupSize = maxGroupSizeRef.current.value;
          
-        if(location ==='' || distance ==='' || maxGroupSize ===''){
+        if(location === '' || distance === '' || maxGroupSize === ''){
             return alert('All fields are required!');
         }
 
-        const res = await fetch(`${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`)
+        const res = await fetch(`${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`);
 
-        if(!res.ok) alert("Something went wrong")
+        if(!res.ok) alert("Something went wrong");
 
             const result = await res.json();
 
             navigate(`/tours/search?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`, {state: result.data});
     };
-    return <Col lg='12'>
+    return ( <Col lg='12'>
         <div className="search__bar">
             <Form className="d-flex align-items-center gap-4">
                 <FormGroup className="d-flex gap-3 form__group form__group-fast">
@@ -57,6 +57,7 @@ const SearchBar = () => {
             </Form>
         </div>
     </Col>
+    );
 };
 
 export default SearchBar;

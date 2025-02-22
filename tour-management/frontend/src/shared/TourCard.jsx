@@ -6,7 +6,7 @@ import "./tour-card.css";
 import calculateAvgRating from "../utils/avgRating";
 
 const TourCard = ({tour}) => {
-    const {_id, title, city, photo, price, featured, reviews } = tour;
+    const { _id, title, city, photo, price, featured, reviews } = tour;
 
     const { totalRating, avgRating } = calculateAvgRating(reviews);
 

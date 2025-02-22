@@ -152,11 +152,6 @@ const Home = () => {
     </section>
     {/* ============= testimonial section end =========== */}
     <Newsletter/>
-
-
-
-
-
 </>
     );
 };

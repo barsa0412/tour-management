@@ -1,0 +1,1 @@
+export const BASE_URL = "https://5000-barsa0412-tourmanagemen-y4ymr19v1dx.ws-us117.gitpod.io/api/v1";

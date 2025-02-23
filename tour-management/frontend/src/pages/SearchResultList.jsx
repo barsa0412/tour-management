@@ -1,7 +1,7 @@
 import React, { useState } from "react"; //6.9k (gzipped: 2.7k)
 import CommonSection from "./../shared/CommonSection";
 
-
+import Newsletter from "./../shared/Newsletter";
 import{Container, Row, Col} from "reactstrap";
 import { useLocation } from 'react-router-dom';
 
@@ -26,6 +26,7 @@ const SearchResultList = () => {
                 </Row>
             </Container>
         </section>
+        <Newsletter/>
         </>
     );
 };

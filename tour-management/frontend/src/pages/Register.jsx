@@ -1,7 +1,8 @@
-import React, {useState} from "react"; //6.9k (gzipped: 2.7k)
+import React, {useState, useContext} from "react"; //6.9k (gzipped: 2.7k)
 import {Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
-import {Link} from "react-router-dom";
-
+import {data, Link, Navigate, useNavigate} from "react-router-dom";
+import { AuthContext } from "./../context/AuthContext";
+import { BASE_URL } from "./../utils/config";
 import "../styles/login.css";
 
 import registerImg from "../assets/images/register.png";
@@ -14,12 +15,33 @@ const Register = () => {
         password: undefined,
         });
 
+        const {dispatch} = useContext(AuthContext);
+        const navigate =useNavigate();
+        
     const handleChange = e => {
         setCredentials(prev=> ({...prev, [e.target.id]: e.target.value}));
     };
 
-    const handleClick = e =>{
+    const handleClick = async e =>{
         e.preventDefault();
+
+        try{
+            const res = await fetch(`${BASE_URL}/auth/register`,{
+                method: "post",
+                headers:{
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(credentials),
+            })
+            const result = await res.json();
+
+            if(!res.ok) alert(result.message);
+
+                dispatch({type: "REGISTER_SUCCESS"});
+                navigate("/login");
+        }catch(err){
+            alert(err.message);
+        }
     };
 
     return ( <section>

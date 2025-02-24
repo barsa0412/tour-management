@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react"; //6.9k (gzipped: 2.7k)
 import {Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
-import {data, Link, Navigate, useNavigate} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "./../context/AuthContext";
 import { BASE_URL } from "./../utils/config";
 import "../styles/login.css";
@@ -32,7 +32,7 @@ const Register = () => {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify(credentials),
-            })
+            });
             const result = await res.json();
 
             if(!res.ok) alert(result.message);
@@ -67,7 +67,7 @@ const Register = () => {
                             <FormGroup>
                                 <input type="password" placeholder="Password" required id= "password" onChange={handleChange} />
                             </FormGroup>
-                            <Button className="btn secondary__btn auth__btn" type="submit" style={{ backgroundColor: 'orange', color: 'white' }}>Create Account</Button>
+                            <Button className="btn secondary__btn auth__btn" type="submit" /*style={{ backgroundColor: 'orange', color: 'white' }} */>Create Account</Button>
                         </Form>
                         <p>Already have an account!<Link to="/login">Login</Link></p>
                     </div>

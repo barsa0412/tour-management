@@ -1,8 +1,9 @@
-import React,{useRef, useEffect} from "react"; //6.9k (gzipped: 2.7k)
+import React,{useRef, useEffect, useContext} from "react"; //6.9k (gzipped: 2.7k)
 import { Container, Row, Button} from "reactstrap";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import "./header.css";
+import { AuthContext } from "../../context/AuthContext";
 
 const nav__links= [
     {
@@ -21,6 +22,13 @@ const nav__links= [
 
 const Header = () => {
     const headerRef = useRef(null);
+    const navigate = useNavigate();
+    const {user, dispatch} = useContext(AuthContext);
+
+    const logout = () =>{
+        dispatch({type: "LOGOUT"})
+        navigate("/");
+    }
 
     const stickyHeaderFunc = () => {
         window.addEventListener("scroll", () => {
@@ -68,13 +76,22 @@ useEffect(() => {
 
                  <div className="nav__right d-flex align-items-center gap-4">
                    <div className="nav__btns d-flex align-items-center gap-4">
-                   <Button className="btn secondary__btn" style={{ backgroundColor: 'orange', color: 'white' }}>
+
+                    {
+                        user? ( <>
+                        <h5 className="mb-0">{user.username}</h5>
+                        <Button className="btn btn-dark" onClick={logout}>Logout</Button>
+                        </> ) : ( <>
+                        <Button className="btn secondary__btn" style={{ backgroundColor: 'orange', color: 'white' }}>
                        <Link to='/login' style={{ color: 'white', textDecoration: 'none' }}>Login</Link>
                    </Button>
                    
                     <Button className="btn primary__btn" style={{ backgroundColor: 'orange', color: 'white' }}>
                                     <Link to='/register' style={{ color: 'white', textDecoration: 'none' }}>Register</Link>
                                 </Button>
+                        </>
+                    )}
+                   
                    </div>
                     <span className="mobile__menu"></span>
                     <i class="ri-menu-add-fill"></i>

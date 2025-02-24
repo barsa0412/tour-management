@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./booking.css";
 import {Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Booking = ({ tour, avgRating }) => {
     const {price, reviews} = tour;

@@ -69,7 +69,7 @@ const Login = () => {
                             <FormGroup>
                                 <input type="password" placeholder="Password" required id= "password" onChange={handleChange} />
                             </FormGroup>
-                            <Button className="btn secondary__btn auth__btn" type="submit" style={{ backgroundColor: 'orange', color: 'white' }}>Login</Button>
+                            <Button className="btn secondary__btn auth__btn" type="submit" /*style={{ backgroundColor: 'orange', color: 'white' }}*/>Login</Button>
                         </Form>
                         <p>Don't have an account? <Link to="/register">Create</Link></p>
                     </div>

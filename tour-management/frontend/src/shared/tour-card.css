@@ -94,3 +94,21 @@
 .tour__card {
     padding-bottom: 40px;
 }
+
+@media only screen and (max-width:992px){
+    .tour__title{
+        font-style: 1rem;
+    }
+
+    .booking__btn a {
+        font-style: 0.8rem;
+    }
+
+    .booking__btn {
+        padding: 0.2rem 0.5rem !important;
+    }
+
+    .tour__location, .tour__rating{
+        font-style: 0.8rem;
+    }
+}

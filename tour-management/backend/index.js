@@ -43,7 +43,7 @@ app.use("/api/v1/reviews", reviewRoute);
 app.use("/api/v1/booking", bookingRoute);
 
 // Server start
-app.listen(port, async () => {
+app.listen(port, () => {
+  connectDB();
   console.log("Server listening on port", port);
-  await connectDB();
 });

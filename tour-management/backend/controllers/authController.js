@@ -70,10 +70,12 @@ export const login = async (req, res) => {
     );
 
     res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-      })
+     .cookie("accessToken", token, {
+  httpOnly: true,
+  secure: false,
+  sameSite: "lax",
+  expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+})
       .status(200)
       .json({
         success: true,

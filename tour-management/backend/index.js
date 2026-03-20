@@ -11,41 +11,39 @@ import reviewRoute from "./routes/reviews.js";
 import bookingRoute from "./routes/booking.js";
 
 dotenv.config();
+
 const app = express();
-const port = process.env.PORT ||  5000;
-const corsOptions = {origin:true, credentials:true}
+const port = process.env.PORT || 5000;
 
-//for testing
-// app.get('/', (req, res)=>{
-//     res.send("api is working");
-// });
-
-//database connection
-mongoose.set("strictQuery", false);
-const connect = async()=>{
-    try{
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log("MongoDB database connected");
-    } catch(err) {
-        console.log("MongoDB database connection failed");
-    }
+const corsOptions = {
+  origin: true,
+  credentials: true
 };
 
+// Database Connection
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB database connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  }
+};
 
-//middleware
+// Middleware
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/tours", tourRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/reviews", reviewRoute);
 app.use("/api/v1/booking", bookingRoute);
 
-app.listen(port, ()=>{
-    connect();
-    console.log("server listening on port", port);
+// Server start
+app.listen(port, async () => {
+  console.log("Server listening on port", port);
+  await connectDB();
 });

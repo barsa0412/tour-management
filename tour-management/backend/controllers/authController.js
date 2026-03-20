@@ -1,63 +1,93 @@
 import User from "../models/User.js";
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export const register = async(req,res) =>{
-    try{
+// REGISTER
+export const register = async (req, res) => {
+  try {
 
-        //hashing password
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
 
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: hash,
-            photo: req.body.photo,
-        });
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+      photo: req.body.photo,
+    });
 
-        await newUser.save()
+    await newUser.save();
 
-        res.status(200).json({success:true, message:"Sucessfully registered"});
+    res.status(200).json({
+      success: true,
+      message: "Successfully registered",
+    });
 
-    } catch (err) {
-        res.status(500).json({success:false, message:"Failed to register. Try again"});
-
-    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to register. Try again",
+    });
+  }
 };
 
-export const login = async(req,res) =>{
 
-    const email = req.body.email
+// LOGIN
+export const login = async (req, res) => {
 
-    try{
-        const user = await User.findOne({email});
-        //if user doesn't exist
-        if(!user){
-            return res.status(404).json({success:false, message:"User not found"});
-        }
+  const email = req.body.email;
 
-        //if user is exist then check the password or compare the password
-        const checkCorrectPassword =  bcrypt.compare(req.body.password, user.password);
+  try {
 
-        if(!checkCorrectPassword){
-            return res.status(401).json({success: false, message:"Incorrect email or password"});
-        }
+    const user = await User.findOne({ email });
 
-        const {password, role, ...rest} = user._doc
-
-        //create jwt token
-        const token = jwt.sign({id:user._id, role:user.role}, process.env.JWT_SECRET_KEY, { expiresIn: "15d"});
-
-        //set token in the browser cookies and send the response to this client
-        res.cookie("accessToken", token, {
-            httpOnly: true,
-            expires: token.expiresIn,
-        }).status(200).json({success:true, message:"successfully login", data:{ ...rest }, role,
-        });
-    } catch (err) {
-        return res.status(500).json({success: false, message:"Failed to login"});
-
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
+
+    const checkCorrectPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!checkCorrectPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Incorrect email or password",
+      });
+    }
+
+    const { password, role, ...rest } = user._doc;
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "15d" }
+    );
+
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: "Successfully login",
+        token,
+        data: { ...rest },
+        role,
+      });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to login",
+    });
+  }
 };

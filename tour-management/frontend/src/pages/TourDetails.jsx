@@ -91,9 +91,13 @@ const TourDetails = () => {
                 <div className="tour__content">
 
                   <img
-                    src={`${BASE_URL.replace("/api/v1", "")}/uploads/${photo}`}
-                    alt={title}
-                  />
+  src={
+    photo?.startsWith("http")
+      ? photo
+      : `${BASE_URL.replace("/api/v1", "")}/uploads/${photo}`
+  }
+  alt={title}
+/>
 
                   <div className="tour__info">
                     <h2>{title}</h2>

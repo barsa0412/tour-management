@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
 
 const Booking = ({ tour, avgRating }) => {
-  const { price, reviews, title } = tour;
+  const { price = 0, title = "" } = tour || {};
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -54,7 +54,7 @@ const Booking = ({ tour, avgRating }) => {
     }
 
     try {
-      const res = await fetch(`${BASE_URL}/booking`, {
+      const res = await fetch(`${BASE_URL}/bookings`, {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -124,10 +124,14 @@ const Booking = ({ tour, avgRating }) => {
               onChange={handleChange}
             />
           </FormGroup>
+
+          <Button type="submit" className="btn primary__btn w-100 mt-4">
+            Book Now
+          </Button>
         </Form>
       </div>
 
-      <ListGroup className="list-group">
+      <ListGroup className="booking__bottom">
         <ListGroupItem className="border-0 px-0">
           <h5>₹{price} x {booking.guestSize}</h5>
           <span>₹{Number(price) * Number(booking.guestSize)}</span>
@@ -143,10 +147,6 @@ const Booking = ({ tour, avgRating }) => {
           <span>₹{totalAmount}</span>
         </ListGroupItem>
       </ListGroup>
-
-      <Button className="btn primary__btn w-100 mt-4" onClick={handleClick}>
-        Book Now
-      </Button>
     </div>
   );
 };
